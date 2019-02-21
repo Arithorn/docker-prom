@@ -4,13 +4,12 @@ services:
     image: prom/prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - /storage/prometheus/:/prometheus
     ports:
       - "9091:9090"
   snmp:
     image: prom/snmp-exporter
+    volumes:
+      - ./snmp.yml:/etc/snmp_exporter/snmp.yml
     ports: 
       - "9116:9116"
-  # mikrotik-exporter:
-  #   image: nshttpd/mikrotik-exporter:1.0.5
-  #   ports:
-  #     - "9121:9436"
