@@ -31,3 +31,8 @@ scrape_configs:
       target_label: instance
     - target_label: __address__
       replacement: snmp:9116  # SNMP exporter.
+- job_name: 'docker'
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+  static_configs:
+    - targets: ['localhost:9323']
