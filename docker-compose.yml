@@ -1,6 +1,8 @@
 version: "3"
 services:
   prometheus:
+    container_name: prometheus
+    hostname: promehteus
     image: prom/prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
@@ -8,8 +10,20 @@ services:
     ports:
       - "9091:9090"
   snmp:
+    container_name: snmp
+    hostname: snmp
     image: prom/snmp-exporter
     volumes:
       - ./snmp.yml:/etc/snmp_exporter/snmp.yml
     ports: 
       - "9116:9116"
+  grafana:
+    container_name: grafana
+    hostname: grafana
+    image: grafana/grafana
+    volumes:
+      - /storage/grafana/:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANAPASS}
+    ports: 
+      - "3000:3000"
